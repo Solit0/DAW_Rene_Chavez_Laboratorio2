@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "controlCalidad", "controlCalidad.csproj", "{F6813929-16D7-4445-9C88-A9362B4DF700}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6813929-16D7-4445-9C88-A9362B4DF700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6813929-16D7-4445-9C88-A9362B4DF700}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6813929-16D7-4445-9C88-A9362B4DF700}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6813929-16D7-4445-9C88-A9362B4DF700}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
