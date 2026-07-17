@@ -1,0 +1,77 @@
+@model controlCalidad.Models.ViewModels.DashboardCalidadViewModel
+@{ ViewData["Title"] = "Dashboard de Calidad"; }
+
+<h2 class="mb-4">Dashboard Gerencial Analítico</h2>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Evaluados</h5>
+                <h3>@Model.TotalGenerales</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Tasa Aprobación</h5>
+                <h3>@Model.Aprobados</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-danger mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Lotes Rechazados</h5>
+                <h3>@Model.Rechazados</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Promedio Defectos</h5>
+                <h3>@Model.PromedioDefectos %</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Inteligencia Operativa</h4>
+        <ul class="list-group mb-4">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Inspector Líder (Mayor Aprobaciones)
+                <span class="badge bg-primary rounded-pill">@Model.MejorInspector</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Foco de Alerta (Mayor Rechazo)
+                <span class="badge bg-danger rounded-pill">@Model.FocoAlerta</span>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h4>Últimas 5 Inspecciones (En tiempo real)</h4>
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Producto</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var i in Model.UltimasInspecciones)
+                {
+                    <tr>
+                        <td>@i.Inspeccion.NumeroInspeccion</td>
+                        <td>@i.Inspeccion.Producto</td>
+                        <td>@i.Inspeccion.Resultado</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

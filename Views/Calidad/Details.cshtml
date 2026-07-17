@@ -1,0 +1,22 @@
+@model controlCalidad.Models.ViewModels.InspeccionViewModel
+@{ ViewData["Title"] = "Detalle"; }
+
+<h2>Detalle de Inspección: @Model.Inspeccion.NumeroInspeccion</h2>
+<hr />
+<dl class="row">
+    <dt class="col-sm-3">Lote / Producto</dt>
+    <dd class="col-sm-9">@Model.Inspeccion.Lote / @Model.Inspeccion.Producto</dd>
+
+    <dt class="col-sm-3">Inspector</dt>
+    <dd class="col-sm-9">@Model.Inspeccion.Inspector</dd>
+
+    <dt class="col-sm-3">Inspeccionadas vs Defectuosas</dt>
+    <dd class="col-sm-9">@Model.Inspeccion.CantidadesInspeccionadas vs @Model.Inspeccion.CantidadesDefectuosas</dd>
+
+    <dt class="col-sm-3">Indicador (Nivel)</dt>
+    <dd class="col-sm-9">@Model.NivelCalidad (@Model.PorcentajeDefectos %)</dd>
+
+    <dt class="col-sm-3">Resultado Final</dt>
+    <dd class="col-sm-9">@Model.Inspeccion.Resultado (@Model.Inspeccion.Defecto)</dd>
+</dl>
+<a asp-action="Index" class="btn btn-primary">Volver al listado</a>

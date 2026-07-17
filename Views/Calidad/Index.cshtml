@@ -1,0 +1,94 @@
+@model IEnumerable<controlCalidad.Models.ViewModels.InspeccionViewModel>
+@{ 
+    ViewData["Title"] = "Registro de Inspecciones"; 
+}
+
+<h2 class="mb-4">Listado de Inspecciones</h2>
+
+<div class="row mb-4 align-items-center text-muted">
+    <div class="col-md-3">
+        <strong>Aprobadas:</strong> <span class="text-success">@ViewData["Aprobadas"]</span>
+    </div>
+    <div class="col-md-3">
+        <strong>Rechazadas:</strong> <span class="text-danger">@ViewData["Rechazadas"]</span>
+    </div>
+    <div class="col-md-3">
+        <strong>Promedio Defectos:</strong> @ViewData["PromedioDefectos"]%
+    </div>
+    <div class="col-md-3 text-end">
+        <small>@ViewData["FechaServidor"]</small>
+    </div>
+</div>
+
+@if(TempData["Error"] != null) {
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <form asp-action="Index" method="get">
+            <div class="row g-2 align-items-center">
+                <div class="col-md-5">
+                    <input type="text" name="searchString" class="form-control" placeholder="Buscar por Lote o Código..." />
+                </div>
+                <div class="col-md-3">
+                    <select name="filtroResultado" class="form-select">
+                        <option value="">Todos los Estados</option>
+                        <option value="Aprobado">Aprobado</option>
+                        <option value="Rechazado">Rechazado</option>
+                    </select>
+                </div>
+                <div class="col-md-4 d-flex gap-2 justify-content-end">
+                    <button type="submit" class="btn btn-primary px-4">Buscar / Filtrar</button>
+                    <a asp-action="Create" class="btn btn-success px-4">Nueva Inspección</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped align-middle text-center">
+        <thead class="table-dark">
+            <tr>
+                <th>Código</th>
+                <th>Lote</th>
+                <th>Producto</th>
+                <th>% Defectos</th>
+                <th>Nivel</th>
+                <th>Resultado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="fw-bold">@item.Inspeccion.NumeroInspeccion</td>
+                    <td>@item.Inspeccion.Lote</td>
+                    <td>@item.Inspeccion.Producto</td>
+                    <td>@item.PorcentajeDefectos %</td>
+                    <td>
+                        <span class="badge bg-secondary">@item.NivelCalidad</span>
+                    </td>
+                    <td>
+                        <span class="badge @(item.Inspeccion.Resultado == "Aprobado" ? "bg-success" : "bg-danger")">
+                            @item.Inspeccion.Resultado
+                        </span>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Inspeccion.Id" class="btn btn-sm btn-warning">Editar</a>
+                        <a asp-action="Details" asp-route-id="@item.Inspeccion.Id" class="btn btn-sm btn-info text-white">Detalles</a>
+                        @if(item.Inspeccion.Resultado != "Aprobado")
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Inspeccion.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
